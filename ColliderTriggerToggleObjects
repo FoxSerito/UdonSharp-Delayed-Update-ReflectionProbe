@@ -1,0 +1,82 @@
+using UdonSharp;
+using UnityEngine;
+using VRC.SDKBase;
+using VRC.Udon;
+
+public class ColliderTriggerToggleObjects : UdonSharpBehaviour
+{
+    public GameObject[] Enable_onEnter;
+    public GameObject[] Disable_onEnter;
+    public GameObject[] Toggle_onEnter;
+    public GameObject[] Enable_onExit;
+    public GameObject[] Disable_onExit;
+    public GameObject[] Toggle_onExit;
+
+    public override void OnPlayerTriggerEnter(VRCPlayerApi player)
+    {
+        if (Enable_onEnter.Length > 0)
+        {
+            if (player.isLocal)
+            {
+                foreach (var TurnOn_Enter_Object in Enable_onEnter)
+                {
+                    TurnOn_Enter_Object.SetActive(true);
+                }
+            }
+        }
+        if (Disable_onEnter.Length > 0)
+        {
+            if (player.isLocal)
+            {
+                foreach (var TurnOff_Enter_Object in Disable_onEnter)
+                {
+                    TurnOff_Enter_Object.SetActive(false);
+                }
+            }
+        }
+        if (Toggle_onEnter.Length > 0)
+        {
+            if (player.isLocal)
+            {
+                foreach (var Toggle_OnEnter_Object in Toggle_onEnter)
+                {
+                    Toggle_OnEnter_Object.SetActive(Toggle_OnEnter_Object.activeSelf);
+                }
+            }
+        }
+    }
+
+    public override void OnPlayerTriggerExit(VRCPlayerApi player)
+    {
+        if (Enable_onExit.Length > 0)
+        {
+            if (player.isLocal)
+            {
+                foreach (var TurnOn_Exit_Object in Enable_onExit)
+                {
+                    TurnOn_Exit_Object.SetActive(true);
+                }
+            }
+        }
+        if (Disable_onExit.Length > 0)
+        {
+            if (player.isLocal)
+            {
+                foreach (var TurnOff_Exit_Object in Disable_onExit)
+                {
+                    TurnOff_Exit_Object.SetActive(false);
+                }
+            }
+        }
+        if (Toggle_onExit.Length > 0)
+        {
+            if (player.isLocal)
+            {
+                foreach (var Toggle_OnExit_Object in Toggle_onExit)
+                {
+                    Toggle_OnExit_Object.SetActive(Toggle_OnExit_Object.activeSelf);
+                }
+            }
+        }
+    }
+}
